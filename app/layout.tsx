@@ -16,7 +16,6 @@ export const metadata: Metadata = {
   title: "AGI Directory",
   description: "Project using NextJS",
 };
-
 export default function RootLayout({
   children,
 }: Readonly<{
