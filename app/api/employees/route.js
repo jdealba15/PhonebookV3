@@ -1,57 +1,29 @@
-import { NextResponse } from "next/server";
-
-const employees = [
-    {
-      id: 1,
-      name: "Andrea Amaya",
-      email: "andreaam@adrianasinsurance.com",
-      position: "Sales Agent",
-      department: "Sales",
-      tags: ["call center", "inbounder", "outbounder"],
-      teamUserId: "andreaam@adrianasinsurance.com",
-      avatar: "https://via.placeholder.com/56"
-    },
-    {
-      id: 2,
-      name: "Stephanie Alejandra Escobar Pimentel",
-      email: "stephanies@agibusiness.com",
-      position: "Phone Sales",
-      department: "Immigration",
-      tags: [
-        "Immigration",
-        "customer service",
-        "consultations",
-        "payments",
-        "marketing",
-        "sales",
-        "FBI fingerprint",
-        "Visas"
-      ],
-      teamUserId: "stephanies@agibusiness.com",
-      avatar: "https://via.placeholder.com/56"
-    },
-    {
-      id: 3,
-      name: "Alexis Alberto Ortega Carrillo",
-      email: "alexiso@agibusiness.com",
-      position: "Training and Internal Communication",
-      department: "Human Resources",
-      tags: ["Recruitment", "interviews", "warnings", "hiring"],
-      teamUserId: "alexiso@agibusiness.com",
-      avatar: "https://via.placeholder.com/56"
-    },
-    {
-      id: 4,
-      name: "Josefina Contreras Hernandez",
-      email: "josefinah@agibusiness.com",
-      position: "Phone Sales",
-      department: "Sales",
-      tags: ["Closer", "outbounder", "inbounder", "call center"],
-      teamUserId: "josefinah@agibusiness.com",
-      avatar: "https://via.placeholder.com/56"
-    }
-  ];
-
 export async function GET() {
-    return NextResponse.json(employees);
+  const res = await fetch("https://randomuser.me/api/?results=100&nat=us", {
+    cache: "no-store",
+  });
+
+  const data = await res.json();
+
+  const departments = ["IT", "HR", "Sales", "Finance", "Customer Service", "Claims", "Operations"];
+
+  const positions = ["Technician", "Manager", "Analyst", "Representative", "Coordinator", "Specialist"];
+
+  const employees = data.results.map((user, index) => {
+    const department = departments[index % departments.length];
+    const position = positions[index % positions.length];
+
+    return {
+      id: index + 1,
+      name: `${user.name.first} ${user.name.last}`,
+      email: user.email,
+      position,
+      department,
+      teamUserId: user.login.username,
+      avatar: user.picture.thumbnail,
+      tags: ["directory", "test-user"],
+    };
+  });
+
+  return Response.json(employees);
 }

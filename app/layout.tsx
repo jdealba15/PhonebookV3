@@ -26,15 +26,10 @@ return (
     lang="en"
     className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-    <body className="min-h-full flex flex-col">
-      <header className="p-4 border-b">
-        AGI Directory
-      </header>
-
+   <body className="min-h-full flex flex-col">
       <main className="flex-1">
-        {children}
+          {children}
       </main>
-
       <footer className="p-4 border-t text-sm text-gray-500">
         © 2026 AGI
       </footer>
