@@ -18,25 +18,25 @@ export default function DirectoryPage() {
     fetchEmployees();
   }, []);
 
-const suggestions = employees
-  .filter((employee) => {
-    const query = searchTerm.toLowerCase();
+  const suggestions = employees
+    .filter((employee) => {
+      const query = searchTerm.toLowerCase();
 
-    return (
-      employee.name.toLowerCase().includes(query) ||
-      employee.email.toLowerCase().includes(query) ||
-      employee.department.toLowerCase().includes(query) ||
-      employee.position.toLowerCase().includes(query)
-    );
-  })
-  .slice(0, 5);
+      return (
+        employee.name.toLowerCase().includes(query) ||
+        employee.email.toLowerCase().includes(query) ||
+        employee.department.toLowerCase().includes(query) ||
+        employee.position.toLowerCase().includes(query)
+      );
+    })
+    .slice(0, 5);
   
- const filteredEmployees = employees.filter((employee) => {
-  const search = searchTerm.toLowerCase();
+  const filteredEmployees = employees.filter((employee) => {
+    const search = searchTerm.toLowerCase();
 
-  const value = String(employee[searchType] || "").toLowerCase();
+    const value = String(employee[searchType] || "").toLowerCase();
 
-  return value.includes(search);
+    return value.includes(search);
 });
 
   return (
@@ -65,5 +65,6 @@ const suggestions = employees
           <EmployeeTable filteredEmployees={filteredEmployees} />
         )}
     </div></>
+    //Test comment for 'Pull Request'
   );
 }
